@@ -1,0 +1,47 @@
+# python-practice
+#Dec.6
+#a出现次数最多的10个成语
+a =r"C:\Users\86182\Documents\temp\199801.txt"
+chengyu = {}
+with open(a, encoding="utf-8") as f:
+    for line in f:
+        lines = line.split("  ")
+        for l in lines:
+            l = l.split("/")
+            if l[-1] == "i":
+                if chengyu.get(l[0]):
+                    chengyu[l[0]] += 1
+                else:
+                    chengyu[l[0]]=1
+list_a=sorted(chengyu.items(),key=lambda d:d[1],reverse=True)[:10]
+print(list_a)
+
+
+
+
+
+#b词性种类最多的10个词
+#c这10个词分别有哪些词性
+fo=open(a,encoding='utf-8')
+h=fo.read()
+fo.close()
+b=h.split(' ')
+c={}
+for i in b:
+    d=i.split('/')
+    if len(d)<=1:
+        nnn=0
+    elif d[0] in c:
+        if d[1] in c[d[0]]:
+            nnn=0
+        elif d[1] not in c[d[0]]:
+            c[d[0]].append(d[1])
+            c[d[0]]=(c[d[0]])
+            c[d[0]][0]=c[d[0]][0]+1
+    elif d[0] not in c:
+            e=[1]
+            e.append(d[1])
+            c[d[0]]=e
+f=sorted(c.items(),key=lambda d:d[1][0],reverse=True)
+for i in range(10):
+    print(f[i])
